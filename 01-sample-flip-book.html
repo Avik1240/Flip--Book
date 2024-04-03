@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ministry of Culture - E-Books</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <!-- Flipbook StyleSheet -->
+  <link href="dflip/css/dflip.css" rel="stylesheet" type="text/css">
+
+  <!-- Icons Stylesheet -->
+  <link href="dflip/css/themify-icons.css" rel="stylesheet" type="text/css">
+  <style>
+    body,
+    html {
+      height: 100%;
+      margin: 0;
+    }
+
+    #flipbookContainer {
+      box-shadow: 0px 0px 50px #00000069;
+      border-radius: 12px;
+      transform: translate(-50%, -50%);
+      top: 50%;
+      left: 50%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="flipbookContainer"></div>
+
+  <!-- jQuery 1.9.1 or above -->
+  <script src="dflip/js/libs/jquery.min.js" type="text/javascript"></script>
+
+  <!-- Flipbook main Js file -->
+  <script src="dflip/js/dflip.js" type="text/javascript"></script>
+
+  <script>
+
+    var flipBook;
+
+    jQuery(document).ready(function () {
+      //make sure this file is hosted in localhost or any other server
+      var pdf = '01-sample-flip-book.pdf';
+
+      var options = {
+        webgl: true,
+        height: 800,
+        duration: 500,
+        enableDebugLog: true,
+        direction: DFLIP.DIRECTION.LTR,
+        autoEnableOutline: false //auto open the outline/bookmarks tab
+      };
+      options.outline = [
+
+      ];
+      options.onReady = function (flipbook) {
+        if (flipbook.target.pageCount > 29) {
+          flipbook.target.endPage = 29;
+          flipbook.target.pageCount = 29;
+          flipbook.contentProvider.pageCount = 29;
+          flipbook.ui.update();
+        }
+      };
+      flipBook = $("#flipbookContainer").flipBook(pdf, options);
+    });
+
+  </script>
+</body>
+
+</html>
